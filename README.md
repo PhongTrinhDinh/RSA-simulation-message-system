@@ -75,5 +75,6 @@ Dự án này được tạo ra **duy nhất cho mục đích giáo dục và ng
 Dự án được phát triển và hoàn thiện bởi:
 - **Nguyễn Nam Trung**
 - **Lê Tiến Đạt**
+- **Trịnh ĐÌnh Phong**
 
 Chúng tôi hoan nghênh mọi ý kiến đóng góp và báo lỗi để giúp dự án hoàn thiện hơn.
