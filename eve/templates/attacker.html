@@ -233,14 +233,14 @@
 <body>
     <div class="header">
         <div class="brand">
-            <div class="skull">👁</div>
-            <h1><span>EVE</span> — Attacker Dashboard</h1>
+            <div class="skull">EVE</div>
+            <h1><span>EVE</span> — Attack Dashboard</h1>
         </div>
         <div class="controls">
             <select class="profile-select" id="profileSelect" onchange="setProfile(this.value)">
                 <option value="">Loading profiles...</option>
             </select>
-            <button class="btn btn-ghost" onclick="resetSystem()">🔄 Reset</button>
+            <button class="btn btn-ghost" onclick="resetSystem()">Reset System</button>
         </div>
     </div>
 
@@ -271,7 +271,7 @@
         <!-- Traffic Monitor -->
         <div class="card traffic-card">
             <div class="card-header">
-                <h3>📡 Network Traffic Monitor</h3>
+                <h3>Network Traffic Monitor</h3>
                 <span class="badge" style="background:rgba(6,214,160,0.15);color:var(--cyber);">LIVE</span>
             </div>
             <div class="card-body" style="padding:0;">
@@ -299,7 +299,7 @@
         <!-- Attack Arsenal -->
         <div class="card">
             <div class="card-header">
-                <h3>⚔️ Attack Arsenal</h3>
+                <h3>Attack Arsenal</h3>
             </div>
             <div class="card-body">
                 <div style="margin-bottom:12px;">
@@ -318,7 +318,7 @@
         <!-- Attack Results -->
         <div class="card">
             <div class="card-header">
-                <h3>📊 Kết quả Tấn công</h3>
+                <h3>Kết quả Tấn công</h3>
                 <span id="resultCount" class="badge" style="background:rgba(139,92,246,0.15);color:var(--purple);">0</span>
             </div>
             <div class="card-body result-panel" id="resultPanel">
@@ -347,7 +347,7 @@
                     <div class="attack-btn ${runningAttack===a.id?'disabled':''}"
                          onclick="runAttack('${a.id}')" id="atk-${a.id}">
                         <span class="attack-status ${ready?'ready':'wrong-profile'}">
-                            ${ready?'✓ Sẵn sàng':'⚠ '+a.profile}
+                            ${ready?'Ready':'Profile: '+a.profile}
                         </span>
                         <div class="attack-name">${a.name}</div>
                         <div class="attack-desc">${a.desc}</div>
@@ -474,11 +474,11 @@
                 <div class="r-header">
                     <span class="r-name">${result.attack || '?'}</span>
                     <span class="r-badge ${result.success?'ok':'fail'}">
-                        ${result.success?'✓ THÀNH CÔNG':'✗ THẤT BẠI'}
+                        ${result.success?'SUCCESS':'FAILED'}
                     </span>
                 </div>
                 <div class="r-detail">${escapeHtml(detail)}</div>
-                <div class="r-time">⏱ ${result.duration_ms || 0}ms</div>
+                <div class="r-time">Time: ${result.duration_ms || 0}ms</div>
             `;
 
             panel.prepend(div);

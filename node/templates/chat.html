@@ -7,22 +7,22 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-primary: #0a0e1a;
-            --bg-secondary: #111827;
-            --bg-card: #1a2035;
-            --bg-hover: #243049;
-            --accent: #6366f1;
-            --accent-glow: rgba(99,102,241,0.3);
+            --bg-primary: #f8fafc;
+            --bg-secondary: #ffffff;
+            --bg-card: #ffffff;
+            --bg-hover: #f1f5f9;
+            --accent: #4f46e5;
+            --accent-glow: rgba(79,70,229,0.1);
             --success: #10b981;
             --danger: #ef4444;
             --warning: #f59e0b;
-            --text-primary: #f1f5f9;
-            --text-secondary: #94a3b8;
+            --text-primary: #1e293b;
+            --text-secondary: #475569;
             --text-muted: #64748b;
-            --border: #1e293b;
-            --border-accent: #334155;
+            --border: #e2e8f0;
+            --border-accent: #cbd5e1;
             --radius: 12px;
-            --shadow: 0 8px 32px rgba(0,0,0,0.4);
+            --shadow: 0 4px 12px rgba(0,0,0,0.05);
         }
         * { margin:0; padding:0; box-sizing:border-box; }
         body {
@@ -54,14 +54,16 @@
             background: linear-gradient(135deg, var(--accent), #8b5cf6);
             display: flex; align-items: center; justify-content: center;
             font-weight: 700; font-size: 18px;
-            box-shadow: 0 0 20px var(--accent-glow);
+            color: white;
+            box-shadow: 0 0 15px var(--accent-glow);
         }
-        .sidebar-header .node-info h2 { font-size: 16px; font-weight: 600; }
+        .sidebar-header .node-info h2 { font-size: 16px; font-weight: 600; color: var(--text-primary); }
         .sidebar-header .node-info .profile-badge {
             font-size: 11px; color: var(--accent);
-            background: rgba(99,102,241,0.15);
+            background: rgba(79,70,229,0.1);
             padding: 2px 8px; border-radius: 20px;
             margin-top: 2px; display: inline-block;
+            font-weight: 600;
         }
         .contacts-title {
             padding: 16px 20px 8px;
@@ -76,16 +78,18 @@
             padding: 12px; border-radius: var(--radius);
             cursor: pointer; transition: all 0.2s;
             margin-bottom: 2px;
+            color: var(--text-secondary);
         }
         .contact-item:hover, .contact-item.active {
             background: var(--bg-hover);
+            color: var(--text-primary);
         }
         .contact-item .dot {
             width: 8px; height: 8px; border-radius: 50%;
-            background: var(--text-muted);
+            background: #cbd5e1;
             flex-shrink: 0;
         }
-        .contact-item .dot.online { background: var(--success); box-shadow: 0 0 8px rgba(16,185,129,0.5); }
+        .contact-item .dot.online { background: var(--success); box-shadow: 0 0 8px rgba(16,185,129,0.3); }
         .contact-item .name { font-weight: 500; font-size: 14px; }
         .contact-item .unread-badge {
             background: var(--danger);
@@ -95,13 +99,12 @@
             padding: 2px 6px;
             border-radius: 10px;
             margin-left: auto;
-            box-shadow: 0 0 8px rgba(239,68,68,0.5);
         }
         /* ── Key Info Panel ── */
         .key-panel {
             padding: 16px;
             border-top: 1px solid var(--border);
-            background: var(--bg-card);
+            background: #f8fafc;
         }
         .key-panel h4 {
             font-size: 11px; text-transform: uppercase;
@@ -114,17 +117,19 @@
             font-size: 11px; font-family: 'JetBrains Mono', monospace;
             color: var(--accent); max-width: 150px;
             overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+            font-weight: 500;
         }
         /* ── Main Chat Area ── */
-        .main { flex: 1; display: flex; flex-direction: column; }
+        .main { flex: 1; display: flex; flex-direction: column; background: var(--bg-primary); }
         .chat-header {
             padding: 16px 24px;
             border-bottom: 1px solid var(--border);
             display: flex; align-items: center; justify-content: space-between;
             background: var(--bg-secondary);
+            box-shadow: 0 1px 2px rgba(0,0,0,0.03);
         }
-        .chat-header h3 { font-size: 16px; font-weight: 600; }
-        .chat-header .status { font-size: 12px; color: var(--success); }
+        .chat-header h3 { font-size: 16px; font-weight: 600; color: var(--text-primary); }
+        .chat-header .status { font-size: 12px; color: var(--success); font-weight: 500; }
         .messages-area {
             flex: 1; overflow-y: auto; padding: 24px;
             display: flex; flex-direction: column; gap: 16px;
@@ -133,17 +138,22 @@
             max-width: 75%; padding: 12px 16px;
             border-radius: 16px; position: relative;
             animation: fadeIn 0.3s ease;
+            box-shadow: var(--shadow);
         }
         @keyframes fadeIn { from { opacity:0; transform:translateY(10px); } to { opacity:1; transform:translateY(0); } }
         .msg-bubble.sent {
             align-self: flex-end;
             background: linear-gradient(135deg, var(--accent), #8b5cf6);
+            color: white;
             border-bottom-right-radius: 4px;
         }
+        .msg-bubble.sent .msg-cipher { color: rgba(255,255,255,0.7); border-top: 1px solid rgba(255,255,255,0.2); }
+        .msg-bubble.sent .msg-time { color: rgba(255,255,255,0.7); }
         .msg-bubble.received {
             align-self: flex-start;
-            background: var(--bg-card);
-            border: 1px solid var(--border-accent);
+            background: white;
+            border: 1px solid var(--border);
+            color: var(--text-primary);
             border-bottom-left-radius: 4px;
         }
         .msg-bubble .msg-sender {
@@ -155,7 +165,7 @@
             font-family: 'JetBrains Mono', monospace;
             font-size: 10px; color: var(--text-muted);
             margin-top: 8px; padding-top: 8px;
-            border-top: 1px solid rgba(255,255,255,0.1);
+            border-top: 1px solid var(--border);
             word-break: break-all;
             max-height: 60px; overflow: hidden;
         }
@@ -172,12 +182,12 @@
         }
         .input-area input {
             flex: 1; padding: 12px 16px;
-            border-radius: 24px; border: 1px solid var(--border-accent);
-            background: var(--bg-card); color: var(--text-primary);
+            border-radius: 24px; border: 1px solid var(--border);
+            background: #f1f5f9; color: var(--text-primary);
             font-size: 14px; font-family: 'Inter', sans-serif;
-            outline: none; transition: border-color 0.2s;
+            outline: none; transition: all 0.2s;
         }
-        .input-area input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-glow); }
+        .input-area input:focus { border-color: var(--accent); background: white; box-shadow: 0 0 0 3px var(--accent-glow); }
         .input-area button {
             width: 44px; height: 44px; border-radius: 50%;
             background: linear-gradient(135deg, var(--accent), #8b5cf6);
@@ -185,25 +195,20 @@
             display: flex; align-items: center; justify-content: center;
             transition: transform 0.15s, box-shadow 0.2s;
         }
-        .input-area button:hover { transform: scale(1.05); box-shadow: 0 0 20px var(--accent-glow); }
+        .input-area button:hover { transform: scale(1.05); box-shadow: 0 4px 12px var(--accent-glow); }
         .input-area button:active { transform: scale(0.95); }
         .input-area button svg { width: 20px; height: 20px; fill: white; }
         /* ── Alert Banner ── */
         .alert-banner {
             padding: 12px 24px;
-            background: linear-gradient(135deg, rgba(239,68,68,0.2), rgba(239,68,68,0.05));
-            border-bottom: 1px solid rgba(239,68,68,0.3);
+            background: #fef2f2;
+            border-bottom: 1px solid #fee2e2;
             display: flex; align-items: center; gap: 12px;
-            animation: alertPulse 2s infinite;
-        }
-        @keyframes alertPulse {
-            0%,100% { background: linear-gradient(135deg, rgba(239,68,68,0.2), rgba(239,68,68,0.05)); }
-            50% { background: linear-gradient(135deg, rgba(239,68,68,0.3), rgba(239,68,68,0.1)); }
         }
         .alert-banner .alert-icon { font-size: 20px; }
-        .alert-banner .alert-text { font-size: 13px; color: #fca5a5; flex: 1; }
+        .alert-banner .alert-text { font-size: 13px; color: #991b1b; flex: 1; font-weight: 500; }
         .alert-banner .alert-close {
-            background: none; border: none; color: #fca5a5;
+            background: none; border: none; color: #ef4444;
             cursor: pointer; font-size: 18px;
         }
         .empty-chat {
@@ -211,13 +216,13 @@
             align-items: center; justify-content: center;
             color: var(--text-muted); gap: 16px;
         }
-        .empty-chat .icon { font-size: 48px; opacity: 0.3; }
+        .empty-chat .icon { font-size: 48px; opacity: 0.2; }
         .empty-chat p { font-size: 14px; }
         /* Scrollbar */
         ::-webkit-scrollbar { width: 6px; }
         ::-webkit-scrollbar-track { background: transparent; }
-        ::-webkit-scrollbar-thumb { background: var(--border-accent); border-radius: 3px; }
-        ::-webkit-scrollbar-thumb:hover { background: var(--text-muted); }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 3px; }
+        ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
     </style>
 </head>
 <body>
@@ -236,7 +241,7 @@
             </div>
         </div>
         <div class="key-panel" id="keyPanel">
-            <h4>🔑 Thông số Khóa RSA</h4>
+            <h4>Thông số Khóa RSA</h4>
             <div class="key-row"><span class="label">n</span><span class="value" id="keyN">—</span></div>
             <div class="key-row"><span class="label">e</span><span class="value" id="keyE">—</span></div>
             <div class="key-row"><span class="label">d</span><span class="value" id="keyD">—</span></div>
@@ -255,7 +260,7 @@
         </div>
         <div class="messages-area" id="messagesArea">
             <div class="empty-chat">
-                <div class="icon">💬</div>
+                <div class="icon">CHAT</div>
                 <p>Chọn một liên hệ từ danh sách bên trái để bắt đầu nhắn tin</p>
             </div>
         </div>
@@ -322,7 +327,6 @@
             lastAlertCount = alerts.length;
             container.innerHTML = alerts.map(a => `
                 <div class="alert-banner">
-                    <span class="alert-icon">⚠️</span>
                     <span class="alert-text">${a.message}</span>
                     <button class="alert-close" onclick="clearAlerts()">✕</button>
                 </div>
@@ -360,7 +364,7 @@
             selectedContact = name;
             lastSeenCount[name] = allMessages.filter(m => m.from === name).length;
             document.getElementById('chatTitle').textContent = name.charAt(0).toUpperCase() + name.slice(1);
-            document.getElementById('chatStatus').textContent = '● Online';
+            document.getElementById('chatStatus').textContent = 'Online';
             document.getElementById('msgInput').disabled = false;
             document.getElementById('sendBtn').disabled = false;
             document.getElementById('msgInput').focus();
@@ -376,7 +380,7 @@
                 (m.sent && m.to === selectedContact)
             );
             if (filtered.length === 0) {
-                area.innerHTML = `<div class="empty-chat"><div class="icon">🔐</div><p>Bắt đầu cuộc trò chuyện mã hóa với ${selectedContact}</p></div>`;
+                area.innerHTML = `<div class="empty-chat"><div class="icon">CHAT</div><p>Bắt đầu cuộc trò chuyện mã hóa với ${selectedContact}</p></div>`;
                 return;
             }
             area.innerHTML = filtered.map(m => {
@@ -388,7 +392,7 @@
                     <div class="msg-bubble ${isSent?'sent':'received'}">
                         <div class="msg-sender">${isSent ? 'Bạn' : m.from}</div>
                         <div class="msg-text">${escapeHtml(text)}</div>
-                        <div class="msg-cipher">🔒 ${cipher.substring(0,80)}${cipher.length>80?'...':''}</div>
+                        <div class="msg-cipher">${cipher.substring(0,80)}${cipher.length>80?'...':''}</div>
                         <div class="msg-time">${ts}</div>
                     </div>
                 `;
